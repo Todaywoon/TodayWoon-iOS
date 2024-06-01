@@ -122,9 +122,7 @@ class HomeViewController: UIViewController {
         }
         
         animationView.snp.makeConstraints { make in
-            make.top.equalTo(timeContainer.snp.bottom).offset(32)
-            make.size.equalTo(300)
-            make.centerX.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
     
@@ -136,6 +134,10 @@ class HomeViewController: UIViewController {
 //        present(alert, animated: false)
         
         if walkStartButton.type == .start {
+            // lottie 전환
+            animationView.animation = LottieAnimation.named("outside")
+            animationView.play()
+            
             walkStartButton.type = .camera
             walkStartButton.updateUI()
             walkEndButton.isHidden = false

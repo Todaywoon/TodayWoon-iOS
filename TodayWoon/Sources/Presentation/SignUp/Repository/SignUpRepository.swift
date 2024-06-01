@@ -21,7 +21,10 @@ extension SignUpRepository {
                 }
              }
              """
+        UserManager.shared.saveUserInfo(userID: userID,
+                                        password: password)
         
-        return SignUpRequestBuilder(parameters: SignUpRequestBuilder.Parameter(userID: userID, password: password)).mockRequest(from: jsonString)
+//        return SignUpRequestBuilder(parameters: SignUpRequestBuilder.Parameter(userID: userID, password: password)).mockRequest(from: jsonString)
+        return SignUpRequestBuilder(parameters: SignUpRequestBuilder.Parameter(userID: userID, password: password)).request(debug: true)
     }
 }

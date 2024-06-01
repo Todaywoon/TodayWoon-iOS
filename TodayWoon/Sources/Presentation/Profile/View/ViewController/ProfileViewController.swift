@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import Combine
+import CombineExt
 
 final class ProfileViewController: ViewController<ProfileView> {
     var viewModel: ProfileViewModel
+    var cancellables = Set<AnyCancellable>()
     
     init(_ viewModel: ProfileViewModel) {
         self.viewModel = viewModel
@@ -26,13 +29,23 @@ final class ProfileViewController: ViewController<ProfileView> {
         contentView.gridView.delegate = self
         
         contentView.backgroundColor = .white
+        bindViewModel()
+    }
+    
+    private func bindViewModel() {
+        viewModel.feedsSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.contentView.gridView.reloadData()
+            }
+            .store(in: &cancellables)
     }
 }
 
 extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //        self.items.count
-        return 10
+        return viewModel.feeds.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -54,8 +67,35 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
 
 final class ProfileViewModel {
     weak var coordinator: TabCoordinator?
+    let reposiotry = ProfileRepository()
+    var cancellables = Set<AnyCancellable>()
+    
+    var feedsSubject = CurrentValueSubject<[Feed], Never>([])
+    var feeds: [Feed] {
+        feedsSubject.value
+    }
+    
+    init() {
+        requestMyFeeds()
+    }
     
     func didTapBottomButton() {
         coordinator?.finish()
+    }
+    
+    func requestMyFeeds() {
+        let publisher = reposiotry.requestMyFeeds().share().materialize()
+        
+        publisher.values()
+            .sink { [weak self] myInfo in
+                self?.feedsSubject.send(myInfo.feeds)
+            }
+            .store(in: &cancellables)
+        
+        publisher.failures()
+            .sink { [weak self] error in
+                print("error > ")
+            }
+            .store(in: &cancellables)
     }
 }

@@ -24,9 +24,17 @@ final class SignUpRequestBuilder: CoreRequestBuilder {
     typealias ResponseType = UserInfo
     
     var method: HTTPMethod = .post
-    var baseURL: String = ""
-    var path: String = ""
+    var baseURL: String = NetworkAdapter.shared.baseURL
+    var path: String = "/users"
     var parameters: Parameters?
+    
+    var header: HTTPHeaders? {
+        var defaultHeader: HTTPHeaders = .default
+        defaultHeader.update(name: "user_id", value: "0000")
+        defaultHeader.update(name: "password", value: "0000")
+        
+        return defaultHeader
+    }
     
     init(parameters: Parameter) {
         self.parameters = parameters.value

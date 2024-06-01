@@ -22,6 +22,7 @@ extension LoginRepisotry {
              }
              """
         
-        return LoginRequestBuilder(userID: userID, password: password).mockRequest(from: jsonString)
+//        return LoginRequestBuilder(userID: userID, password: password).mockRequest(from: jsonString)
+        return LoginRequestBuilder(userID: userID, password: password).request(debug: true)
     }
 }

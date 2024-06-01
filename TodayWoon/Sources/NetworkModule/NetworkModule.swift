@@ -26,19 +26,19 @@ public protocol NetworkBuilder {
 
 //MARK: - Default Value Setting
 public extension NetworkBuilder {
-    var header: HTTPHeaders? {
-        var defaultHeader: HTTPHeaders = .default
-
-        header?.makeIterator().forEach {
-            defaultHeader.update($0)
-        }
-        
-        additionalHeader?.forEach { (key, value) in
-            defaultHeader.update(name: key, value: value)
-        }
-        
-        return defaultHeader
-    }
+//    var header: HTTPHeaders? {
+//        var defaultHeader: HTTPHeaders = .default
+//
+//        header?.makeIterator().forEach {
+//            defaultHeader.update($0)
+//        }
+//        
+//        additionalHeader?.forEach { (key, value) in
+//            defaultHeader.update(name: key, value: value)
+//        }
+//        
+//        return defaultHeader
+//    }
     var parameterEncoding: ParameterEncoding {
         switch method {
         case .get:

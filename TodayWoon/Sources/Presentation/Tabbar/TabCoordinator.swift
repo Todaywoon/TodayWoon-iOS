@@ -75,14 +75,14 @@ class TabCoordinator: NSObject, Coordinator {
         switch page {
         case .home:
             // If needed: Each tab bar flow can have it's own Coordinator.
-            let viewModel = ReadyViewModel()
-            viewModel.coordinator = self
-            let readyVC = ReadyViewController(viewModel)
+            //let viewModel = ReadyViewModel()
+            //viewModel.coordinator = self
+            let readyVC = HomeViewController()
                         
             navController.pushViewController(readyVC, animated: true)
         case .feed:
-            let viewModel = SteadyViewModel()
-            viewModel.coordinator = self
+            //let viewModel = SteadyViewModel()
+            //viewModel.coordinator = self
             let steadyVC = FeedViewController()
             
             navController.pushViewController(steadyVC, animated: true)

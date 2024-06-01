@@ -46,7 +46,8 @@ extension LoginViewController {
     private func bindAction() {
         contentView.loginButton.tap
             .sink { [weak self] _ in
-                self?.viewModel.didTapBottomButton()
+                self?.viewModel.requestLogin()
+//                self?.viewModel.didTapBottomButton()
             }
             .store(in: &cancellables)
         

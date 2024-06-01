@@ -13,6 +13,8 @@ import Then
 class SignUpView: BaseView {
     private(set) var signUpLabel = UILabel().then {
         $0.text = "회원가입"
+        $0.textColor = .black100
+        $0.font = TodayWoonFontFamily.Pretendard.semiBold.font(size: 30)
     }
     
     private let idContainer = UIStackView().then {
@@ -22,6 +24,8 @@ class SignUpView: BaseView {
     }
     private(set) var idLabel = UILabel().then {
         $0.text = "아이디"
+        $0.textColor = .black100
+        $0.font = TodayWoonFontFamily.Pretendard.semiBold.font(size: 16)
     }
     private(set) var idTextField = UITextField().then {
         $0.placeholder = "ID"
@@ -37,6 +41,8 @@ class SignUpView: BaseView {
     }
     private(set) var passwordLabel = UILabel().then {
         $0.text = "비밀번호"
+        $0.textColor = .black100
+        $0.font = TodayWoonFontFamily.Pretendard.semiBold.font(size: 16)
     }
     
     private(set) var passwordTextField = UITextField().then {
@@ -49,6 +55,7 @@ class SignUpView: BaseView {
     private(set) var startButton = UIButton().then {
         $0.setTitle("시작하기", for: .normal)
         $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = TodayWoonFontFamily.Pretendard.semiBold.font(size: 16)
         $0.backgroundColor = .primary
         $0.layer.cornerRadius = 8
     }

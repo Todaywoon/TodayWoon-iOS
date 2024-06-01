@@ -87,11 +87,11 @@ class TabCoordinator: NSObject, Coordinator {
             
             navController.pushViewController(steadyVC, animated: true)
         case .profile:
-            let viewModel = GoViewModel()
+            let viewModel = ProfileViewModel()
             viewModel.coordinator = self
-            let goVC = GoViewController(viewModel)
+            let profileVC = ProfileViewController(viewModel)
             
-            navController.pushViewController(goVC, animated: true)
+            navController.pushViewController(profileVC, animated: true)
         }
         
         return navController

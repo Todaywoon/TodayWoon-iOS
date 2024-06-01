@@ -35,4 +35,12 @@ class LoginCoordinator: Coordinator {
         
         navigationController.pushViewController(loginVC, animated: true)
     }
+    
+    func moveSignUpViewController() {
+        let viewModel = SignUpViewModel()
+        viewModel.coordinator = self
+        let signupVC = SignUpViewController(viewModel)
+        
+        navigationController.pushViewController(signupVC, animated: true)
+    }
 }

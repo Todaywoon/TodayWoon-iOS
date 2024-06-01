@@ -52,23 +52,23 @@ class HomeViewController: UIViewController {
         $0.text = "10:24"
     }
     
-    let animationView = UIView()
-//    let animationView = LottieAnimationView().then {
-//        $0.animation = LottieAnimation.named("inside")
-//        $0.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin, .flexibleBottomMargin]
-//        $0.contentMode = .scaleAspectFill
-//        $0.backgroundBehavior = .pauseAndRestore
-//        $0.loopMode = .loop
-//        $0.play(fromProgress: 0, toProgress: 2.0, loopMode: .loop, completion: { _ in
-//        })
-//    }
+    
+    let animationView = LottieAnimationView().then {
+        $0.animation = LottieAnimation.named("inside")
+        $0.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin, .flexibleBottomMargin]
+        $0.contentMode = .scaleAspectFill
+        $0.backgroundBehavior = .pauseAndRestore
+        $0.loopMode = .loop
+        $0.play(fromProgress: 0, toProgress: 2.0, loopMode: .loop, completion: { _ in
+        })
+    }
     
     override func viewDidLoad() {
         view.backgroundColor = .white
-        setupConstraints()
-        
         view.addSubview(animationView)
-
+        
+        setupConstraints()
+        animationView.play()
     }
     
     private func setupConstraints() {
@@ -121,11 +121,11 @@ class HomeViewController: UIViewController {
             make.bottom.equalTo(timeContainer.snp.bottom).offset(-8)
         }
         
-//        animationView.snp.makeConstraints { make in
-//            make.top.equalTo(timeContainer.snp.bottom).offset(32)
-//            make.size.equalTo(300)
-//            make.centerX.equalToSuperview()
-//        }
+        animationView.snp.makeConstraints { make in
+            make.top.equalTo(timeContainer.snp.bottom).offset(32)
+            make.size.equalTo(300)
+            make.centerX.equalToSuperview()
+        }
     }
     
     @objc private func walkStartButtonClicked() {

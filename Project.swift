@@ -11,6 +11,7 @@ let project = Project(
             infoPlist: .extendingDefault(
                 with: [
                     "UILaunchStoryboardName": "LaunchScreen.storyboard",
+                    "NSCameraUsageDescription": "This app requires access to the camera."
                 ]
             ),
             sources: ["TodayWoon/Sources/**"],
@@ -20,7 +21,8 @@ let project = Project(
                 .external(name: "Then"),
                 .external(name: "SnapKit"),
                 .external(name: "CombineExt"),
-                .external(name: "CombineCocoa")
+                .external(name: "CombineCocoa"),
+                .external(name: "Kingfisher")
             ]
         ),
         .target(

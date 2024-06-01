@@ -2,52 +2,33 @@
 //  LoginRequestBuilder.swift
 //  TodayWoon
 //
-//  Created by 이숭인 on 6/1/24.
+//  Created by 이숭인 on 6/2/24.
 //
 
 import Foundation
+
 import Alamofire
 
-struct UserInfo: Decodable {
-    var response: Response
-    
-    struct Response: Decodable {
-        let userID: String
-        
-        enum CodingKeys: String, CodingKey {
-            case userID = "user_id"
-        }
-    }
-}
+//struct User: Decodable {
+//    let userID: String
+//    let password: String
+//    
+//    enum CodingKeys: String, CodingKey {
+//        case userID = "user_id"
+//        case password
+//    }
+//}
 
 final class LoginRequestBuilder: CoreRequestBuilder {
     typealias ResponseType = UserInfo
     
-    var method: HTTPMethod = .post
+    var method: HTTPMethod = .get
     var baseURL: String = ""
     var path: String = ""
-    var parameters: Parameters?
+    var additionalHeader: AdditionalHeader?
+    var parameters: Parameters? = nil
     
-    init(parameters: Parameter) {
-        self.parameters = parameters.value
-    }
-}
-
-extension LoginRequestBuilder {
-    struct Parameter {
-        let userID: String
-        let password: String
-        
-        init(userID: String, password: String) {
-            self.userID = userID
-            self.password = password
-        }
-        
-        var value: Parameters {
-            [
-                "user_id": userID,
-                "password": password
-            ]
-        }
+    init(userID: String, password: String) {
+        additionalHeader = ["user_id": userID, "password": password]
     }
 }

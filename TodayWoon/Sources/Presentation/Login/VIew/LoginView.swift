@@ -12,6 +12,7 @@ import Then
 class LoginView: BaseView {
     private(set) var titleLabel = UILabel().then {
         $0.text = "일상의 휴식을\n가져볼까요?"
+        $0.font = .systemFont(ofSize: 30, weight: .regular)
         $0.numberOfLines = 0
     }
     
@@ -20,13 +21,13 @@ class LoginView: BaseView {
         $0.distribution = .fillProportionally
         $0.spacing = 12
     }
-    private let idTextField = UITextField().then {
+    let idTextField = UITextField().then {
         $0.placeholder = "ID"
         $0.backgroundColor = .lightGray
         $0.layer.cornerRadius = 4
         $0.addLeftPadding()
     }
-    private let passwordTextField = UITextField().then {
+    let passwordTextField = UITextField().then {
         $0.placeholder = "Password"
         $0.backgroundColor = .lightGray
         $0.layer.cornerRadius = 4
@@ -77,10 +78,11 @@ class LoginView: BaseView {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(120)
             make.leading.equalToSuperview().inset(16)
+            make.height.equalTo(titleLabel.intrinsicContentSize)
         }
         
         textFieldContainer.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.top).offset(52)
+            make.top.equalTo(titleLabel.snp.bottom).offset(52)
             make.horizontalEdges.equalToSuperview().inset(16)
         }
         

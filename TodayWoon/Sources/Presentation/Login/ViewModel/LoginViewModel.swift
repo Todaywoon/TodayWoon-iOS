@@ -15,8 +15,8 @@ final class LoginViewModel {
     
     var cancellables = Set<AnyCancellable>()
     
-    func requestLogin() {
-        let publisher = repository.requestLogin(userID: "", password: "").share().materialize()
+    func requestLogin(userID: String, password: String) {
+        let publisher = repository.requestLogin(userID: userID, password: password).share().materialize()
         
         publisher.values()
             .sink { [weak self] userInfo in

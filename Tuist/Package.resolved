@@ -28,12 +28,12 @@
       }
     },
     {
-      "identity" : "networkmodule",
+      "identity" : "kingfisher",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/leesoongin/NetworkModule.git",
+      "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
-        "revision" : "c06281cd9c8fc34483243b50870e28c86698bcb0",
-        "version" : "1.1.2"
+        "revision" : "5b92f029fab2cce44386d28588098b5be0824ef5",
+        "version" : "7.11.0"
       }
     },
     {

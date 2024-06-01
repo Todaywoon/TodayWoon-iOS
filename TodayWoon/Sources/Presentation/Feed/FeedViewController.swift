@@ -12,6 +12,12 @@ class FeedViewController: UIViewController {
     
     private var currentItemIndex = 0
     private let idArray = ["@seunge", "@yuzxcxz","@sjinEEE", "@mumu", "@litoo"]
+    private let dateArray = ["2024년 6월 1일", "2024년 6월 1일", "2024년 6월 1일", "2024년 6월 2일", "2024년 6월 2일",
+                             "2024년 6월 2일", "2024년 6월 2일", "2024년 6월 2일", "2024년 6월 2일", "2024년 6월 2일",
+                             "2024년 6월 2일", "2024년 6월 2일", "2024년 6월 2일", "2024년 6월 2일", "2024년 6월 2일",
+                             "2024년 6월 2일", "2024년 6월 2일", "2024년 6월 2일"]
+    private let timeArray = ["1시 12분 - 2시 10분", "1시 12분 - 2시 10분", "1시 12분 - 2시 10분", "1시 12분 - 2시 10분", "1시 12분 - 2시 10분",
+                             "1시 12분 - 2시 10분", "1시 12분 - 2시 10분", "1시 12분 - 2시 10분", "1시 12분 - 2시 10분", "1시 12분 - 2시 10분"]
     
     private let feedTableView: UITableView = {
         let tableView = UITableView()
@@ -72,7 +78,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource, UIScro
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 500
+        return 600
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -121,7 +127,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource, UIScro
          */
         
         let cell = feedTableView.dequeueReusableCell(cellType: FeedTableViewCell.self, indexPath: indexPath)
-        cell.setup(idArray[indexPath.row])
+        cell.setup(idArray[indexPath.row], dateArray[indexPath.row], timeArray[indexPath.row])
         return cell
     }
     

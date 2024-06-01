@@ -6,25 +6,23 @@
 //
 
 import UIKit
+import SnapKit
+import Then
+import Combine
 
+extension LoginViewController {
+    enum Event {
+        case login
+    }
+}
 
-class LoginViewController: UIViewController {
+class LoginViewController: ViewController<LoginView> {
+    var cancellables = Set<AnyCancellable>()
     var viewModel: LoginViewModel
 
-    private let loginButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Login", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 8.0
-        
-        return button
-    }()
-    
     init(_ viewModel: LoginViewModel) {
         self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     required init?(coder: NSCoder) {
@@ -33,34 +31,31 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .white
         
-        view.addSubview(loginButton)
-
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            loginButton.widthAnchor.constraint(equalToConstant: 200),
-            loginButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
-        loginButton.addTarget(self, action: #selector(didTapLoginButton(_:)), for: .touchUpInside)
+        bindAction()
     }
     
     deinit {
         print("LoginViewController deinit")
     }
-
-    @objc private func didTapLoginButton(_ sender: Any) {
-        viewModel.didTapBottomButton()
-    }
 }
 
+//MARK: - bind
 extension LoginViewController {
-    enum Event {
-        case login
+    private func bindAction() {
+        contentView.loginButton.tap
+            .sink { [weak self] _ in
+                //TODO: 메인 으로 이동
+                print("//TODO: 메인 으로 이동")
+            }
+            .store(in: &cancellables)
+        
+        contentView.signUpButton.tap
+            .sink { [weak self] _ in
+                //TODO: 회원가입 으로 이동
+                print("//TODO: 회원가입 으로 이동")
+            }
+            .store(in: &cancellables)
     }
 }

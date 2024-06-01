@@ -58,6 +58,10 @@ extension SignUpViewController {
         contentView.startButton.tap
             .sink { [weak self] _ in
                 self?.viewModel.completeSignUp()
+//                let userID = self?.contentView.idTextField.text ?? ""
+//                let password = self?.contentView.passwordTextField.text ?? ""
+//                self?.viewModel.requestSignUp(userID: userID,
+//                                              password: password)
             }
             .store(in: &cancellables)
     }

@@ -22,6 +22,21 @@ public protocol CoreRequestBuilder: NetworkBuilder {
     func cancel()
 }
 
+extension CoreRequestBuilder {
+//    var header: HTTPHeaders? {
+//        var defaultHeader: HTTPHeaders = .default
+//
+//        header?.makeIterator().forEach {
+//            defaultHeader.update($0)
+//        }
+//        
+//        additionalHeader?.forEach { (key, value) in
+//            defaultHeader.update(name: key, value: value)
+//        }
+//        return defaultHeader
+//    }
+}
+
 //MARK: - DataRequestWrapper
 @available(macOS 10.15, iOS 15, *)
 extension CoreRequestBuilder {
@@ -42,6 +57,9 @@ extension CoreRequestBuilder {
             return .failure(CommonNetworkError.invalidURL)
         }
         
+        if header != nil {
+            print("header is not nil")
+        }
         let request = networkSession.request(convertedURL,
                                              method: method,
                                              parameters: parameters,
@@ -74,11 +92,11 @@ extension CoreRequestBuilder {
     
     public func defaultRequest(debug: Bool) -> AnyPublisher<ResponseType, Error> {
         Future<ResponseType, Error> { promise in
-            if case .failure(let error) = self.dataRequestWrapper {
-                promise(.failure(error))
-            }
-            
-            guard case .success(let dataRequest) = self.dataRequestWrapper else {
+//            if case .failure(let error) = createDataRequestWrapper() {
+//                promise(.failure(error))
+//            }
+//            
+            guard case .success(let dataRequest) = createDataRequestWrapper() else {
                 return promise(.failure(CommonNetworkError.unknown))
             }
             

@@ -57,10 +57,11 @@ extension LoginViewController {
     private func bindAction() {
         contentView.loginButton.tap
             .sink { [weak self] _ in
-                let userID = self?.contentView.idTextField.text
-                let password = self?.contentView.passwordTextField.text
-                self?.viewModel.requestLogin(userID: userID ?? "",
-                                             password: password ?? "")
+                self?.viewModel.didTapBottomButton()
+//                let userID = self?.contentView.idTextField.text
+//                let password = self?.contentView.passwordTextField.text
+//                self?.viewModel.requestLogin(userID: userID ?? "",
+//                                             password: password ?? "")
             }
             .store(in: &cancellables)
         

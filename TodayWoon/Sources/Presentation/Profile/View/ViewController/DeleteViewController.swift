@@ -35,7 +35,7 @@ final class DeleteViewController: UIViewController {
             .sink { _ in
                 
                 let FeedDetailVC = FeedDetailViewController()
-                self.navigationController?.pushViewController(FeedDetailVC, animated: true)
+                self.navigationController?.pushViewController(FeedDetailVC, animated: false)
             }
             .store(in: &cancellables)
     }

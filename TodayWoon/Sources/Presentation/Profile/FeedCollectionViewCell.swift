@@ -13,8 +13,8 @@ final class FeedCollectionViewCell: UICollectionViewCell {
     static let cellId = "FeedCollectionViewCell"
 
     private let feedImage = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.image = UIImage(systemName: "cloud.bolt")
+        $0.contentMode = .scaleAspectFill
+        $0.image = UIImage(named: "img_sky")
         $0.tintColor = .white
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 15
@@ -23,7 +23,7 @@ final class FeedCollectionViewCell: UICollectionViewCell {
     override init(frame : CGRect){
         super.init(frame: frame)
         
-        self.backgroundColor = .blue
+        self.backgroundColor = .white
         setUp()
         setLayout()
         self.layer.masksToBounds = true

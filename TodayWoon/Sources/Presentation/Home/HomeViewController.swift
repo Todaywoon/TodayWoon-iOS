@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import Alamofire
 import SnapKit
 import Then
 import Lottie
@@ -27,25 +28,27 @@ class HomeViewController: UIViewController {
     private let imageView = UIImageView()
     private var photoImage = UIImage()
     
-    let timeContainer = UIView().then {
-        $0.layer.masksToBounds = false
-        
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.white.cgColor
-        $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOffset = CGSize(width: 2, height: 4)
-        /// shadow의 투명도 (0 ~ 1)
-        $0.layer.shadowOpacity = 0.5
-        /// shadow의 corner radius
-        $0.layer.shadowRadius = 5.0
-        $0.layer.cornerRadius = 28
+    let timeContainer = UIView().then { _ in
+//        $0.layer.masksToBounds = false
+//        
+//        $0.layer.borderWidth = 1
+//        $0.layer.borderColor = UIColor.white.cgColor
+//        $0.layer.shadowColor = UIColor.black.cgColor
+//        $0.layer.shadowOffset = CGSize(width: 2, height: 4)
+//        /// shadow의 투명도 (0 ~ 1)
+//        $0.layer.shadowOpacity = 0.5
+//        /// shadow의 corner radius
+//        $0.layer.shadowRadius = 5.0
+//        $0.layer.cornerRadius = 28
     }
+    
     private let startDescriptionLabel = UILabel().then {
         $0.font = TodayWoonFontFamily.Pretendard.regular.font(size: 18)
         $0.textColor = .primary
         $0.textAlignment = .center
         $0.text = "Start Time"
     }
+    
     private let timeLabel = UILabel().then {
         $0.textColor = .gray700
         $0.font = TodayWoonFontFamily.Pretendard.regular.font(size: 28)
@@ -78,7 +81,7 @@ class HomeViewController: UIViewController {
             make.width.equalTo(280)
             make.height.equalTo(56)
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().inset(210)
+            make.bottom.equalToSuperview().inset(80)
         }
         walkStartButton.addTarget(self, action: #selector(walkStartButtonClicked), for: .touchUpInside)
         
@@ -209,6 +212,32 @@ class HomeViewController: UIViewController {
     }
 }
 
+extension HomeViewController {
+    
+    func uploadImage() {
+        /**
+         Content-Type: form-data
+
+         {
+          image : {MultiPartFile(jpg, png, jpeg},
+         body : {
+           start_time:{String, yyyy-mm-dd   hh:mm:ss}
+           finish_time:{String, yyyy-mm-dd hh:mm:ss}
+           }
+         }
+         **/
+        
+        let url = "https://34.64.187.145:8080/feed"  //EndPoint.savePost.path
+        var params = ["image" : self.photoImage,
+                      "start_time" : "2024-06-02 11:11:11",
+                      "finish_time" : "2024-06-03 22:22:22"] as [String : Any]
+        
+        self.walkStartButton.hide()
+        
+        APIService().postImage(userID: "3333", password: "3333", url: url, parameters: params)
+    }
+}
+
 extension HomeViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -217,10 +246,15 @@ extension HomeViewController: UINavigationControllerDelegate, UIImagePickerContr
             return
         }
         
+        self.photoImage = image
         self.imageView.image = image
         
-        // 업로드 로직 넣어야함
+        uploadImage()
         
         picker.dismiss(animated: true, completion: nil)
     }
   }
+
+class Empty: Encodable {
+    
+}

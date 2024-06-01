@@ -35,4 +35,8 @@ final class WalkStartButton: UIButton {
             self.setImage(image, for: .normal)
         }
     }
+    
+    func hide() {
+        self.isHidden = true
+    }
 }

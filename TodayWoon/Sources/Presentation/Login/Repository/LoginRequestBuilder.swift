@@ -20,11 +20,15 @@ import Alamofire
 //}
 
 final class LoginRequestBuilder: CoreRequestBuilder {
+    var header: Alamofire.HTTPHeaders? {
+        return .default
+    }
+    
     typealias ResponseType = UserInfo
     
     var method: HTTPMethod = .get
-    var baseURL: String = ""
-    var path: String = ""
+    var baseURL: String = NetworkAdapter.shared.baseURL
+    var path: String = "/login"
     var additionalHeader: AdditionalHeader?
     var parameters: Parameters? = nil
     

@@ -12,7 +12,8 @@ import Then
 class LoginView: BaseView {
     private(set) var titleLabel = UILabel().then {
         $0.text = "일상의 휴식을\n가져볼까요?"
-        $0.font = .systemFont(ofSize: 30, weight: .regular)
+        $0.textColor = .black100
+        $0.font = TodayWoonFontFamily.Pretendard.semiBold.font(size: 30)
         $0.numberOfLines = 0
     }
     
@@ -46,6 +47,7 @@ class LoginView: BaseView {
     
     private(set) var loginButton = UIButton().then {
         $0.setTitle("로그인", for: .normal)
+        $0.titleLabel?.font = TodayWoonFontFamily.Pretendard.semiBold.font(size: 16)
         $0.backgroundColor = .primary
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 8
@@ -53,6 +55,7 @@ class LoginView: BaseView {
     
     private(set) var signUpButton = UIButton().then {
         $0.setTitle("회원가입", for: .normal)
+        $0.titleLabel?.font = TodayWoonFontFamily.Pretendard.semiBold.font(size: 16)
         $0.backgroundColor = .gray700
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 8

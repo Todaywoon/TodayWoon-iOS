@@ -11,7 +11,7 @@ import UIKit
 class FeedTableViewCell: UITableViewCell, ReusableCell {
     
     private let feedImageView: UIImageView = {
-        let image = UIImage(systemName: "star.fill")
+        let image = TodayWoonAsset.Assets.imgSky.image
         let imageView = UIImageView()
         imageView.image = image
         return imageView
@@ -25,19 +25,18 @@ class FeedTableViewCell: UITableViewCell, ReusableCell {
     
     private let idLabel: UILabel = {
         let label = UILabel()
-        label.text = "@yuzxcxz"
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 12)
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 13)
         return label
     }()
     
     private let stampImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "star")
+        imageView.image = UIImage(named: "foot_gray")
         return imageView
     }()
     
-    func setup() {
+    func setup(_ label: String) {
         self.contentView.addSubview(feedImageView)
         feedImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -50,6 +49,7 @@ class FeedTableViewCell: UITableViewCell, ReusableCell {
         }
         
         self.contentView.addSubview(idLabel)
+        idLabel.text = label
         idLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(8)
             make.bottom.equalToSuperview().inset(20)

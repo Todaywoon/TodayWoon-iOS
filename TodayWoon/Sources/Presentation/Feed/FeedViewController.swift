@@ -11,6 +11,7 @@ import SnapKit
 class FeedViewController: UIViewController {
     
     private var currentItemIndex = 0
+    private let idArray = ["@seunge", "@yuzxcxz","@sjinEEE", "@mumu", "@litoo"]
     
     private let feedTableView: UITableView = {
         let tableView = UITableView()
@@ -24,6 +25,7 @@ class FeedViewController: UIViewController {
     }()
     
     override func viewDidLoad() {
+        view.backgroundColor = .white
         setAttribute()
         setupConstraints()
         setNavigationBarButton()
@@ -119,7 +121,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource, UIScro
          */
         
         let cell = feedTableView.dequeueReusableCell(cellType: FeedTableViewCell.self, indexPath: indexPath)
-        cell.setup()
+        cell.setup(idArray[indexPath.row])
         return cell
     }
     

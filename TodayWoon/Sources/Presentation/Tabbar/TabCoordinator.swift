@@ -55,7 +55,7 @@ class TabCoordinator: NSObject, Coordinator {
         tabBarController.selectedIndex = TabbarPage.home.pageOrderNumber()
         
         tabBarController.tabBar.backgroundColor = .white
-        tabBarController.tabBar.tintColor = .systemBlue
+        tabBarController.tabBar.tintColor = .primary
         tabBarController.tabBar.unselectedItemTintColor = .gray
         /// Styling
         tabBarController.tabBar.isTranslucent = false
@@ -71,18 +71,28 @@ class TabCoordinator: NSObject, Coordinator {
         navController.tabBarItem = UITabBarItem.init(title: page.pageTitleValue(),
                                                      image: nil,
                                                      tag: page.pageOrderNumber())
-
+        
+        let tabBarItem: UITabBarItem
         switch page {
         case .home:
             // If needed: Each tab bar flow can have it's own Coordinator.
             //let viewModel = ReadyViewModel()
             //viewModel.coordinator = self
+            tabBarItem = UITabBarItem(title: "Walk",
+                                      image: UIImage(named: "Walk")?.withRenderingMode(.alwaysTemplate),
+                                      selectedImage: nil)
+            navController.tabBarItem = tabBarItem
             let readyVC = HomeViewController()
                         
             navController.pushViewController(readyVC, animated: true)
         case .feed:
             //let viewModel = SteadyViewModel()
             //viewModel.coordinator = self
+            tabBarItem = UITabBarItem(title: "Feed",
+                                      image: UIImage(named: "Feed")?.withRenderingMode(.alwaysTemplate),
+                                      selectedImage: nil)
+            navController.tabBarItem = tabBarItem
+            
             let steadyVC = FeedViewController()
             
             navController.pushViewController(steadyVC, animated: true)
@@ -90,6 +100,11 @@ class TabCoordinator: NSObject, Coordinator {
             let viewModel = ProfileViewModel()
             viewModel.coordinator = self
             let profileVC = ProfileViewController(viewModel)
+            
+            tabBarItem = UITabBarItem(title: "My",
+                                      image: UIImage(named: "My")?.withRenderingMode(.alwaysTemplate),
+                                      selectedImage: nil)
+            navController.tabBarItem = tabBarItem
             
             navController.pushViewController(profileVC, animated: true)
         }

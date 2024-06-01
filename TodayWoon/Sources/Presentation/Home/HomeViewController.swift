@@ -65,7 +65,7 @@ class HomeViewController: UIViewController {
             make.width.equalTo(280)
             make.height.equalTo(56)
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().inset(80)
+            make.bottom.equalToSuperview().inset(140)
         }
         walkStartButton.addTarget(self, action: #selector(walkStartButtonClicked), for: .touchUpInside)
         

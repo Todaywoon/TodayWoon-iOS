@@ -72,7 +72,7 @@ class FeedTableViewCell: UITableViewCell, ReusableCell {
             make.centerX.equalToSuperview()
             make.top.equalTo(dateLabel.snp.bottom).offset(8)
             make.height.equalTo(14)
-            make.width.equalTo(113)
+            make.width.equalTo(120)
         }
         timeLabel.text = time
         

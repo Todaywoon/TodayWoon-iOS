@@ -66,7 +66,7 @@ class TabCoordinator: NSObject, Coordinator {
       
     private func getTabController(_ page: TabbarPage) -> UINavigationController {
         let navController = UINavigationController()
-        navController.setNavigationBarHidden(false, animated: false)
+        navController.setNavigationBarHidden(true, animated: false)
 
         navController.tabBarItem = UITabBarItem.init(title: page.pageTitleValue(),
                                                      image: nil,
@@ -83,7 +83,7 @@ class TabCoordinator: NSObject, Coordinator {
         case .feed:
             let viewModel = SteadyViewModel()
             viewModel.coordinator = self
-            let steadyVC = SteadyViewController(viewModel)
+            let steadyVC = FeedViewController()
             
             navController.pushViewController(steadyVC, animated: true)
         case .profile:

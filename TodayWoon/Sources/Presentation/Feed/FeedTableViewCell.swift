@@ -24,7 +24,7 @@ class FeedTableViewCell: UITableViewCell, ReusableCell {
         return label
     }()
     
-    private let feedImageView: UIImageView = {
+    let feedImageView: UIImageView = {
         let image = TodayWoonAsset.Assets.imgSky.image
         let imageView = UIImageView()
         imageView.image = image

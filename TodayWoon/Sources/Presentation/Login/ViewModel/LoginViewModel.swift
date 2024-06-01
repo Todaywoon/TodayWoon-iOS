@@ -15,6 +15,12 @@ final class LoginViewModel {
     
     var cancellables = Set<AnyCancellable>()
     
+    private let loginErrorSubject = PassthroughSubject<Void, Never>()
+    
+    var loginErrorPublisher: AnyPublisher<Void, Never> {
+        loginErrorSubject.eraseToAnyPublisher()
+    }
+    
     func requestLogin(userID: String, password: String) {
         let publisher = repository.requestLogin(userID: userID, password: password).share().materialize()
         
@@ -26,8 +32,8 @@ final class LoginViewModel {
             .store(in: &cancellables)
         
         publisher.failures()
-            .sink { error in
-                print("error> \(error)")
+            .sink { [weak self] _ in
+                self?.loginErrorSubject.send()
             }
             .store(in: &cancellables)
     }

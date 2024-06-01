@@ -8,6 +8,8 @@
 import UIKit
 import AVFoundation
 import Alamofire
+import SnapKit
+import Then
 
 class HomeViewController: UIViewController {
     
@@ -24,6 +26,31 @@ class HomeViewController: UIViewController {
     
     private let imageView = UIImageView()
     private var photoImage = UIImage()
+    
+    let timeContainer = UIView().then {
+        $0.layer.masksToBounds = false
+        
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.white.cgColor
+        $0.layer.shadowColor = UIColor.black.cgColor
+        $0.layer.shadowOffset = CGSize(width: 2, height: 4)
+        /// shadow의 투명도 (0 ~ 1)
+        $0.layer.shadowOpacity = 0.5
+        /// shadow의 corner radius
+        $0.layer.shadowRadius = 5.0
+        $0.layer.cornerRadius = 28
+    }
+    private let startDescriptionLabel = UILabel().then {
+        $0.font = TodayWoonFontFamily.Pretendard.regular.font(size: 18)
+        $0.textColor = .primary
+        $0.textAlignment = .center
+        $0.text = "Start Time"
+    }
+    private let timeLabel = UILabel().then {
+        $0.textColor = .gray700
+        $0.font = TodayWoonFontFamily.Pretendard.regular.font(size: 28)
+        $0.text = "nn:nn"
+    }
     
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -54,9 +81,39 @@ class HomeViewController: UIViewController {
             make.width.height.equalTo(100)
             make.center.equalToSuperview()
         }
+        
+        [timeContainer, startDescriptionLabel, timeLabel].forEach {
+            view.addSubview($0)
+        }
+        
+        timeContainer.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(120)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(52)
+        }
+        
+        startDescriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(timeContainer.snp.top).offset(8)
+            make.leading.equalTo(timeContainer.snp.leading).offset(32)
+            make.trailing.equalTo(timeContainer.snp.trailing).offset(-32)
+            make.height.equalTo(startDescriptionLabel.intrinsicContentSize)
+        }
+        
+        timeLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(timeContainer.snp.centerX)
+            make.top.equalTo(startDescriptionLabel.snp.bottom).offset(4)
+            make.height.equalTo(timeLabel.intrinsicContentSize)
+            make.bottom.equalTo(timeContainer.snp.bottom).offset(-8)
+        }
     }
     
     @objc private func walkStartButtonClicked() {
+        //TODO: upload alert
+//        let alert = UploadAlert(selectedImage: photoImage)
+//        alert.modalPresentationStyle = .overCurrentContext
+//        alert.modalTransitionStyle = .crossDissolve
+//        present(alert, animated: false)
+        
         if walkStartButton.type == .start {
             walkStartButton.type = .camera
             walkStartButton.updateUI()

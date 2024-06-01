@@ -25,7 +25,7 @@ class SignUpView: BaseView {
     }
     private(set) var idTextField = UITextField().then {
         $0.placeholder = "ID"
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = .gray100
         $0.layer.cornerRadius = 4
         $0.addLeftPadding()
     }
@@ -41,7 +41,7 @@ class SignUpView: BaseView {
     
     private(set) var passwordTextField = UITextField().then {
         $0.placeholder = "Password"
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = .gray100
         $0.layer.cornerRadius = 4
         $0.addLeftPadding()
     }
@@ -49,8 +49,8 @@ class SignUpView: BaseView {
     private(set) var startButton = UIButton().then {
         $0.setTitle("시작하기", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = .systemGreen
-        $0.layer.cornerRadius = 4
+        $0.backgroundColor = .primary
+        $0.layer.cornerRadius = 8
     }
     
     override func setupSubviews() {

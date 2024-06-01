@@ -13,14 +13,14 @@ class FeedDetailView: BaseView {
 
     private let dateLabel = UILabel().then {
         $0.text = "2024년 6월 1일"
-        $0.textColor = .black
-        $0.font = .systemFont(ofSize: 14)
+        $0.textColor = .black100
+        $0.font = TodayWoonFontFamily.Pretendard.semiBold.font(size: 14)
     }
     
     private let timeLabel = UILabel().then {
         $0.text = "1시 12분 - 2시 10분"
-        $0.textColor = .gray
-        $0.font = .systemFont(ofSize: 14)
+        $0.textColor = .gray500
+        $0.font = TodayWoonFontFamily.Pretendard.semiBold.font(size: 14)
     }
     
     private let printImage = UIImageView().then {
@@ -30,15 +30,15 @@ class FeedDetailView: BaseView {
     
     private let likeLabel = UILabel().then {
         $0.text = "342개"
-        $0.textColor = .purple
-        $0.font = .systemFont(ofSize: 14)
+        $0.textColor = .primary3
+        $0.font = TodayWoonFontFamily.Pretendard.medium.font(size: 14)
     }
     
     let deleteButton = UIButton(type: .custom).then {
         $0.setTitle("기록 삭제", for: .normal)
         $0.setTitleColor(.gray, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        $0.tintColor = .gray
+        $0.titleLabel?.font = TodayWoonFontFamily.Pretendard.medium.font(size: 14)
+        $0.tintColor = .gray600
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 15
         $0.backgroundColor = .white
@@ -47,10 +47,10 @@ class FeedDetailView: BaseView {
     }
 
     private let feedImage = UIImageView().then {
-        $0.image = UIImage(systemName: "cloud.fill")
+        $0.image = UIImage(named: "img_sky")
         $0.tintColor = .white
-        $0.contentMode = .scaleAspectFit
-        $0.backgroundColor = .blue
+        $0.contentMode = .scaleAspectFill
+        $0.backgroundColor = .white
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 15
     }

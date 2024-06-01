@@ -23,19 +23,19 @@ class LoginView: BaseView {
     }
     let idTextField = UITextField().then {
         $0.placeholder = "ID"
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = .gray100
         $0.layer.cornerRadius = 4
         $0.addLeftPadding()
     }
     let passwordTextField = UITextField().then {
         $0.placeholder = "Password"
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = .gray100
         $0.layer.cornerRadius = 4
         $0.addLeftPadding()
     }
     private let errorLabel = UILabel().then {
         $0.text = "에러메세지 출력 위치"
-        $0.textColor = .red
+        $0.textColor = .red100
     }
     
     private let buttonContainer = UIStackView().then {
@@ -46,16 +46,16 @@ class LoginView: BaseView {
     
     private(set) var loginButton = UIButton().then {
         $0.setTitle("로그인", for: .normal)
-        $0.backgroundColor = .systemBlue
+        $0.backgroundColor = .primary
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 4
+        $0.layer.cornerRadius = 8
     }
     
     private(set) var signUpButton = UIButton().then {
         $0.setTitle("회원가입", for: .normal)
-        $0.backgroundColor = .systemBlue
+        $0.backgroundColor = .gray700
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 4
+        $0.layer.cornerRadius = 8
     }
     
     override func setupSubviews() {
@@ -92,7 +92,6 @@ class LoginView: BaseView {
         }
         
         errorLabel.snp.makeConstraints { make in
-            print("errorLabel.intrinsicContentSize")
             make.height.equalTo(errorLabel.intrinsicContentSize)
         }
         
@@ -113,8 +112,12 @@ class LoginView: BaseView {
         signUpButton.snp.makeConstraints { make in
             make.height.equalTo(56)
         }
+        
+        errorLabel.isHidden = true
     }
     
-    
-    
+    func displayErrorLabel() {
+        errorLabel.isHidden = false
+        layoutIfNeeded()
+    }
 }

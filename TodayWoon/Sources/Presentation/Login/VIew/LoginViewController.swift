@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Then
 import Combine
+import CombineCocoa
 
 extension LoginViewController {
     enum Event {
@@ -34,6 +35,7 @@ class LoginViewController: ViewController<LoginView> {
         view.backgroundColor = .white
         
         bindAction()
+        bindViewModel()
     }
     
     deinit {
@@ -43,6 +45,15 @@ class LoginViewController: ViewController<LoginView> {
 
 //MARK: - bind
 extension LoginViewController {
+    private func bindViewModel() {
+        viewModel.loginErrorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.contentView.displayErrorLabel()
+            }
+            .store(in: &cancellables)
+    }
+    
     private func bindAction() {
         contentView.loginButton.tap
             .sink { [weak self] _ in

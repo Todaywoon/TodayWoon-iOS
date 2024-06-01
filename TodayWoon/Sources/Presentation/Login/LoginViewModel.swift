@@ -14,4 +14,8 @@ final class LoginViewModel {
     func didTapBottomButton() {
         coordinator?.finish()
     }
+    
+    func moveSignUpViewController() {
+        coordinator?.moveSignUpViewController()
+    }
 }

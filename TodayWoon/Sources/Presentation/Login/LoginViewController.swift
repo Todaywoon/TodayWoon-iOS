@@ -46,15 +46,13 @@ extension LoginViewController {
     private func bindAction() {
         contentView.loginButton.tap
             .sink { [weak self] _ in
-                //TODO: 메인 으로 이동
-                print("//TODO: 메인 으로 이동")
+                self?.viewModel.didTapBottomButton()
             }
             .store(in: &cancellables)
         
         contentView.signUpButton.tap
             .sink { [weak self] _ in
-                //TODO: 회원가입 으로 이동
-                print("//TODO: 회원가입 으로 이동")
+                self?.viewModel.moveSignUpViewController()
             }
             .store(in: &cancellables)
     }

@@ -10,6 +10,7 @@ import AVFoundation
 import Alamofire
 import SnapKit
 import Then
+import Lottie
 
 class HomeViewController: UIViewController {
     
@@ -51,15 +52,30 @@ class HomeViewController: UIViewController {
     private let timeLabel = UILabel().then {
         $0.textColor = .gray700
         $0.font = TodayWoonFontFamily.Pretendard.regular.font(size: 28)
-        $0.text = "08:17"
+        $0.text = "10:24"
+    }
+    
+    
+    let animationView = LottieAnimationView().then {
+        $0.animation = LottieAnimation.named("inside")
+        $0.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin, .flexibleBottomMargin]
+        $0.contentMode = .scaleAspectFill
+        $0.backgroundBehavior = .pauseAndRestore
+        $0.loopMode = .loop
+        $0.play(fromProgress: 0, toProgress: 2.0, loopMode: .loop, completion: { _ in
+        })
     }
     
     override func viewDidLoad() {
         view.backgroundColor = .white
+        view.addSubview(animationView)
+        
         setupConstraints()
+        animationView.play()
     }
     
     private func setupConstraints() {
+        
         self.view.addSubview(walkStartButton)
         walkStartButton.snp.makeConstraints { make in
             make.width.equalTo(280)
@@ -107,6 +123,10 @@ class HomeViewController: UIViewController {
             make.height.equalTo(timeLabel.intrinsicContentSize)
             make.bottom.equalTo(timeContainer.snp.bottom).offset(-8)
         }
+        
+        animationView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     @objc private func walkStartButtonClicked() {
@@ -117,6 +137,10 @@ class HomeViewController: UIViewController {
 //        present(alert, animated: false)
         
         if walkStartButton.type == .start {
+            // lottie 전환
+            animationView.animation = LottieAnimation.named("outside")
+            animationView.play()
+            
             walkStartButton.type = .camera
             walkStartButton.updateUI()
             walkEndButton.isHidden = false

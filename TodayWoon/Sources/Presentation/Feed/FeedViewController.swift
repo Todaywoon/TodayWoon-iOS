@@ -11,7 +11,47 @@ import SnapKit
 class FeedViewController: UIViewController {
     
     private var currentItemIndex = 0
-    private let idArray = ["@seunge", "@yuzxcxz","@sjinEEE", "@mumu", "@litoo"]
+    private let idArray = [
+        "@seunge",
+        "@yuzxcxz",
+        "@sjinEEE",
+        "@mumu",
+        "@litoo",
+        "@seunge",
+        "@yuzxcxz",
+        "@sjinEEE",
+        "@mumu",
+        "@litoo",
+        "@seunge",
+        "@yuzxcxz",
+        "@sjinEEE",
+        "@mumu",
+        "@litoo",
+        "@seunge",
+        "@yuzxcxz",
+        "@sjinEEE"
+    ]
+    
+    var feeds: [UIImage] = [
+        TodayWoonAsset.Assets.feed1.image,
+        TodayWoonAsset.Assets.feed2.image,
+        TodayWoonAsset.Assets.feed3.image,
+        TodayWoonAsset.Assets.feed4.image,
+        TodayWoonAsset.Assets.feed5.image,
+        TodayWoonAsset.Assets.feed6.image,
+        TodayWoonAsset.Assets.feed7.image,
+        TodayWoonAsset.Assets.feed8.image,
+        TodayWoonAsset.Assets.feed9.image,
+        TodayWoonAsset.Assets.feed10.image,
+        TodayWoonAsset.Assets.feed11.image,
+        TodayWoonAsset.Assets.feed12.image,
+        TodayWoonAsset.Assets.feed13.image,
+        TodayWoonAsset.Assets.feed14.image,
+        TodayWoonAsset.Assets.feed15.image,
+        TodayWoonAsset.Assets.feed16.image,
+        TodayWoonAsset.Assets.feed17.image,
+        TodayWoonAsset.Assets.feed18.image,
+    ]
     
     private let feedTableView: UITableView = {
         let tableView = UITableView()
@@ -77,7 +117,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource, UIScro
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //let cellCount = feed.count
-        return 5 //cellCount + 1
+        return feeds.count //cellCount + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -122,6 +162,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource, UIScro
         
         let cell = feedTableView.dequeueReusableCell(cellType: FeedTableViewCell.self, indexPath: indexPath)
         cell.setup(idArray[indexPath.row])
+        cell.feedImageView.image = feeds[indexPath.row]
         return cell
     }
     
@@ -131,7 +172,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource, UIScro
         }
             
         if velocity.y > 0.85 {
-            if 5 > currentItemIndex + 1 {
+            if 18 > currentItemIndex + 1 {
                 scrollUpDown(setRow: 1)
             } else {
                 scrollUpDown()

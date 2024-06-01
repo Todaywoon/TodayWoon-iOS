@@ -10,7 +10,7 @@ import UIKit
 
 class FeedTableViewCell: UITableViewCell, ReusableCell {
     
-    private let feedImageView: UIImageView = {
+    var feedImageView: UIImageView = {
         let image = TodayWoonAsset.Assets.imgSky.image
         let imageView = UIImageView()
         imageView.image = image

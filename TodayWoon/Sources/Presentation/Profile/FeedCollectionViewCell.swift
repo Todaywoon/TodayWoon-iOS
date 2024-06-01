@@ -12,7 +12,7 @@ import Then
 final class FeedCollectionViewCell: UICollectionViewCell {
     static let cellId = "FeedCollectionViewCell"
 
-    private let feedImage = UIImageView().then {
+    let feedImage = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.image = UIImage(named: "img_sky")
         $0.tintColor = .white

@@ -13,6 +13,15 @@ final class ProfileViewController: ViewController<ProfileView> {
     var viewModel: ProfileViewModel
     var cancellables = Set<AnyCancellable>()
     
+    var feeds: [UIImage] = [
+        TodayWoonAsset.Assets.feed1.image,
+        TodayWoonAsset.Assets.feed2.image,
+        TodayWoonAsset.Assets.feed3.image,
+        TodayWoonAsset.Assets.feed4.image,
+        TodayWoonAsset.Assets.feed5.image,
+        TodayWoonAsset.Assets.feed6.image
+        ]
+    
     init(_ viewModel: ProfileViewModel) {
         self.viewModel = viewModel
         super.init()
@@ -52,6 +61,7 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCollectionViewCell.cellId, for: indexPath) as! FeedCollectionViewCell
         //        cell.prepare(color: self.items[indexPath.item])
         
+        cell.feedImage.image = feeds[indexPath.row]
         return cell
     }
     

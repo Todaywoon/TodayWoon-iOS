@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import Alamofire
 
 class HomeViewController: UIViewController {
     
@@ -128,6 +129,32 @@ class HomeViewController: UIViewController {
     }
 }
 
+extension HomeViewController {
+    
+    func uploadImage() {
+        /**
+         Content-Type: form-data
+
+         {
+          image : {MultiPartFile(jpg, png, jpeg},
+         body : {
+           start_time:{String, yyyy-mm-dd   hh:mm:ss}
+           finish_time:{String, yyyy-mm-dd hh:mm:ss}
+           }
+         }
+         **/
+        
+        let url = "http://10.10.150.157:8080/feed" //EndPoint.savePost.path
+        var params = ["image" : self.photoImage,
+                      "start_time" : "2024-06-02 11:11:11",
+                      "finish_time" : "2024-06-03 22:22:22"] as [String : Any]
+        
+        self.walkStartButton.hide()
+        
+        APIService().postImage(userID: "3333", password: "3333", url: url, parameters: params)
+    }
+}
+
 extension HomeViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -136,10 +163,15 @@ extension HomeViewController: UINavigationControllerDelegate, UIImagePickerContr
             return
         }
         
+        self.photoImage = image
         self.imageView.image = image
         
-        // 업로드 로직 넣어야함
+        uploadImage()
         
         picker.dismiss(animated: true, completion: nil)
     }
   }
+
+class Empty: Encodable {
+    
+}

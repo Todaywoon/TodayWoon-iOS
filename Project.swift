@@ -11,6 +11,7 @@ let project = Project(
             infoPlist: .extendingDefault(
                 with: [
                     "UILaunchStoryboardName": "LaunchScreen.storyboard",
+                    "NSCameraUsageDescription": "This app requires access to the camera."
                 ]
             ),
             sources: ["TodayWoon/Sources/**"],

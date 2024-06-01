@@ -24,8 +24,7 @@ class FeedDetailView: BaseView {
     }
     
     private let printImage = UIImageView().then {
-        $0.image = UIImage(systemName: "poweroutlet.type.f.fill")
-        $0.tintColor = .purple
+        $0.image = UIImage(named: "Foot")
         $0.contentMode = .scaleAspectFit
     }
     
@@ -78,6 +77,7 @@ class FeedDetailView: BaseView {
         printImage.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(16)
             $0.top.equalTo(timeLabel.snp.bottom).offset(10)
+            $0.width.height.equalTo(20)
             $0.height.equalTo(printImage.intrinsicContentSize)
         }
         

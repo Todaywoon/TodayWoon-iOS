@@ -28,6 +28,15 @@
       }
     },
     {
+      "identity" : "networkmodule",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/leesoongin/NetworkModule.git",
+      "state" : {
+        "revision" : "c06281cd9c8fc34483243b50870e28c86698bcb0",
+        "version" : "1.1.2"
+      }
+    },
+    {
       "identity" : "snapkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SnapKit/SnapKit.git",

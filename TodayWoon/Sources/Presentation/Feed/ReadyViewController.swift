@@ -117,16 +117,3 @@ final class ReadyViewModel {
 //        coordinator?.selectPage(.steady)
     }
 }
-
-extension UIControl {
-    var tap: AnyPublisher<Void, Never> {
-        controlEventPublisher(for: .touchUpInside)
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
-    }
-    
-    func controlEventPublisher(for events: UIControl.Event) -> AnyPublisher<Void, Never> {
-        Publishers.ControlEvent(control: self, events: events)
-            .eraseToAnyPublisher()
-    }
-}
